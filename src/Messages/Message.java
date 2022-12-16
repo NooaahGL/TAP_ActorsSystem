@@ -21,6 +21,9 @@ public class Message {
 
 	}
 
+	public Message(Actor from) {
+		this.from = from;
+	}
 	public Actor getFrom() {
 		return from;
 	}

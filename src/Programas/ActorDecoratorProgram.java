@@ -17,7 +17,7 @@ public class ActorDecoratorProgram {
 		System.out.println("------------Prueba decotator fireWall------------");
 		//--------------------------------------------------------------------------------
 		Message m = new Message("Hola decorator");
-		ActorProxy fireWall = acContext.spawnActor("ActorFireWall", new FireWallDecorator(new InsultActor(), acContext));
+		ActorProxy fireWall = acContext.spawnActor("ActorFireWall", new FireWallDecorator(new InsultActor()));
 		fireWall.send(m);
 		
 		Message m2 = new Message(new InsultActor(), "Hola desconocido");

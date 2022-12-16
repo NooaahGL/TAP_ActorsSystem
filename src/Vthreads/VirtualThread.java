@@ -8,7 +8,6 @@ public class VirtualThread {
 			if (i % 10_000 == 0) {
 				System.out.println(i);
 			}
-
 			// UNCOMMENT WHEN CONFIGURED ENVIRONMENT.
 			Thread startVirtualThread = Thread.startVirtualThread(() -> {
 				try {
@@ -17,8 +16,6 @@ public class VirtualThread {
 					e.printStackTrace();
 				}
 			});
-
-
 		}
 	}
 }

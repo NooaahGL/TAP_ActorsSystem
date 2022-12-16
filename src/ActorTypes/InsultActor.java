@@ -13,9 +13,16 @@ public class InsultActor extends ActorGeneric {
 
 	
 	public void processMessage(Message m) throws InterruptedException {
-		/*switch(m) {
-			case GetInsultMessage: addInsultMessage(m);
-		}*/
+		
+		switch (m){
+        case AddInsultMessage m1 -> addInsultMessage(m);
+        case QuitMessage m1 -> System.out.println("BWYE BYE ");
+        case GetInsultMessage m1 -> GetInsultMessage(m1);
+        case AllInsultMessages m1 -> GetAllInsultsMessage(m1);
+        default -> System.out.println("ERROR");
+	       
+	    }
+	   /*
 		if (m instanceof AddInsultMessage) {
 			addInsultMessage(m);
 			
@@ -25,6 +32,7 @@ public class InsultActor extends ActorGeneric {
 		}else if(m instanceof AllInsultMessages){
 			GetAllInsultsMessage(m);
 		}
+		 */
 	}
 	
 	public void GetInsultMessage(Message m) throws InterruptedException {
@@ -37,23 +45,26 @@ public class InsultActor extends ActorGeneric {
 		System.out.println("");
 	}
 	
-	public void GetAllInsultsMessage(Message ms) throws InterruptedException {
+	public void GetAllInsultsMessage(Message m) throws InterruptedException {
 		System.out.println("Get all insults:");
 		
-		for(String m:insults) {
-			ms.getFrom().send(new Message(this, m));
+		for(String n:insults) {
+			m.getFrom().send(new Message(this, n));
 		}
 		System.out.println("");
 	}
 	
 
 	private void addInsultMessage(Message m) {
-		System.out.println("Añadido el insulto " + m.getMensaje());
+		System.out.println("Agregado el insulto " + m.getMensaje());
 		insults.add(m.getMensaje());
 		System.out.println("");
 
 	}
 	
+	private int getNumInsults() {
+		return insults.size();
+	}
 	@Override
 	public void run() {
 		Message m;
