@@ -35,13 +35,31 @@ public class ReflectiveActor extends ActorGeneric {
 		
 	}
 
-	public void processMessage(Message m)  throws ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		//Class aClass = Class.forName((String) instancia);
-		Class aClass = instancia.getClass();
-		Method nameMethod=aClass.getDeclaredMethod(m.getMethod());
+	public void processMessage(Message m) {
 		
-		Object invocationResult = null;
-		nameMethod.invoke(m.getArgs());
+		//Class aClass = instancia.getClass();
+		Method nameMethod;
+		try {
+			Class aClass = Class.forName("Dynamic.InsultService");
+			String name = ((ObjectMessage) m).getMethod();
+			Class parameterType = ((ObjectMessage) m).getArgsClass();
+			nameMethod = aClass.getDeclaredMethod(name);
+			
+			Object newObject = aClass.newInstance();
+			nameMethod.invoke(newObject);
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		}
         
 	}
 
