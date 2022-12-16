@@ -1,0 +1,58 @@
+package Dynamic;
+
+import java.lang.reflect.*;
+
+import ActorTypes.ActorProxyResponder;
+import Dades.ActorProxy;
+import Messages.*;
+
+public class DynamicProxy implements InvocationHandler{
+	private Object target = null;
+	private ActorProxy actor;
+	
+    public static Object intercept(Object target, ActorProxy a){
+        Class targetClass = target.getClass();
+        Class interfaces[] = targetClass.getInterfaces();
+        
+        return Proxy. newProxyInstance(targetClass.getClassLoader(),
+                interfaces, new DynamicProxy(target, a));
+    }
+    private DynamicProxy(Object target, ActorProxy a) {
+        this.target = target;
+        this.actor=a;
+    }
+
+    
+	public Object invoke2(Object proxy, Method method, Object[] args) throws Throwable {
+        Object invocationResult = null;
+        String name = method.getName();
+        
+        if("addInsult".equals(name)) {								
+           actor.getActor().send(new AddInsultMessage(actor, (String) args[0]));
+           
+        } else if("getInsult".equals(name)) {
+        	actor.getActor().send(new GetInsultMessage(new ActorProxyResponder(actor)));
+        	invocationResult = actor.receive().getMensaje();
+            
+        } else if("getAllInsults".equals(name)) {
+        	actor.getActor().send(new AllInsultMessages(new ActorProxyResponder(actor)));
+        	//actor.getActor().getNumInsults();
+        	invocationResult = actor.receive();
+        }
+            return invocationResult;
+	}
+	
+	@Override
+	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+        Object invocationResult = null;
+        
+        actor.getActor().send(new ObjectMessage(actor, method.getName(), args));
+        if (method.getReturnType() != void.class) {
+        	invocationResult = actor.receive();
+        }
+        return invocationResult;
+      
+	}
+
+
+}
