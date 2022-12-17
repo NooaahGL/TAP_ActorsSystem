@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Set;
 
 import ActorTypes.ActorProxyResponder;
+import Vthreads.*;
 
 public class ActorContext{
 
@@ -33,8 +34,12 @@ public class ActorContext{
 		ActorProxy proxy;
 		proxy = new ActorProxy(a);
 		
-		Thread t = new Thread(a);
-		t. start();
+		//Pattern Factory para elegir entre threads y virtualThreads
+		ThreadAbstractFactory factory = new VThreadFactory();
+		AbstractThread th = factory.createThread(a);
+		
+		th.startThread();
+		//t. start();
 		
 		actorTable.put(name, a);
 

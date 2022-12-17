@@ -1,5 +1,8 @@
 package Programas;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import ActorTypes.InsultActor;
 import Dades.*;
 import Dynamic.*;
@@ -14,14 +17,12 @@ public class DynamicProxyProgram {
 		ActorProxy actor = acContext.spawnActor("Actor",new InsultActor());
 		
 		InsultServiceInterface insulter = (InsultServiceInterface)DynamicProxy.intercept(new InsultService(), actor);
+		insulter.addInsult("idiot");
 		insulter.addInsult("stupid");
 		System.out.println(insulter.getInsult());
 		
-		String[] m = insulter.getAllInsults();
-		for(String insult: m) {
-			System.out.println(insult);
-			
-		}
+		insulter.getAllInsults();
+
 
 	}
 	

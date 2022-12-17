@@ -1,5 +1,6 @@
 package Dynamic;
 
+import java.util.List;
 
 public interface InsultServiceInterface {
 
@@ -7,5 +8,5 @@ public interface InsultServiceInterface {
 
 	public String getInsult();
 	
-	public String[] getAllInsults();
+	public List<String> getAllInsults();
 }

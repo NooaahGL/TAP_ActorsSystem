@@ -1,8 +1,10 @@
 package Dynamic;
 
 import java.lang.reflect.*;
+import java.util.ArrayList;
+import java.util.List;
 
-import ActorTypes.ActorProxyResponder;
+import ActorTypes.*;
 import Dades.ActorProxy;
 import Messages.*;
 
@@ -22,8 +24,8 @@ public class DynamicProxy implements InvocationHandler{
         this.actor=a;
     }
 
-    
-	public Object invoke2(Object proxy, Method method, Object[] args) throws Throwable {
+    @Override
+	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Object invocationResult = null;
         String name = method.getName();
         
@@ -36,14 +38,15 @@ public class DynamicProxy implements InvocationHandler{
             
         } else if("getAllInsults".equals(name)) {
         	actor.getActor().send(new AllInsultMessages(new ActorProxyResponder(actor)));
-        	//actor.getActor().getNumInsults();
-        	invocationResult = actor.receive();
+        	for (int i = 0; i<((InsultActor) actor.getActor()).getNumInsults();i++) {
+    			System.out.println(actor.receive().getMensaje());
+    		}
         }
             return invocationResult;
 	}
 	
-	@Override
-	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+	
+	public Object invoke2(Object proxy, Method method, Object[] args) throws Throwable {
         Object invocationResult = null;
         
         actor.getActor().send(new ObjectMessage(actor, method.getName(), args));

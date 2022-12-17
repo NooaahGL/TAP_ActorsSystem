@@ -13,7 +13,7 @@ public class InsultActor extends ActorGeneric {
 
 	
 	public void processMessage(Message m) throws InterruptedException {
-		/*
+		
 		switch (m){
         case AddInsultMessage m1 -> addInsultMessage(m);
         case QuitMessage m1 -> System.out.println("BWYE BYE ");
@@ -22,7 +22,7 @@ public class InsultActor extends ActorGeneric {
         default -> System.out.println("ERROR");
 	       
 	    }
-	   */
+		/*
 		if (m instanceof AddInsultMessage) {
 			addInsultMessage(m);
 			
@@ -32,7 +32,7 @@ public class InsultActor extends ActorGeneric {
 		}else if(m instanceof AllInsultMessages){
 			GetAllInsultsMessage(m);
 		}
-
+		  */
 	}
 	
 	public void GetInsultMessage(Message m) throws InterruptedException {
@@ -62,7 +62,7 @@ public class InsultActor extends ActorGeneric {
 
 	}
 	
-	private int getNumInsults() {
+	public int getNumInsults() {
 		return insults.size();
 	}
 	@Override

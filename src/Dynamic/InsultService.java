@@ -12,14 +12,10 @@ public class InsultService implements InsultServiceInterface{
 	public InsultService(Actor a) {
 		this.a = a;
 		this.insults = new ArrayList<String>();
+
 	}
 	public InsultService() {
 		insults = new ArrayList<String>();
-		addInsult("stupid");
-		addInsult("berk");
-		addInsult("idiot");
-		addInsult("shit");
-		
 	}
 
 	public void addInsult(String s) {
@@ -44,15 +40,9 @@ public class InsultService implements InsultServiceInterface{
 		}
 	}
 	
-	public String[] getAllInsults() {
+	public List<String> getAllInsults() {
 		System.out.println("GetAllinsult mediante InsultService");
-		String[] ret= null;
-		
-		System.out.println("Get all insults:");
-		for(String a:insults) {
-			ret[ret.length]=a;
-		}
-		return ret;
+		return insults;
 
 	}
 
