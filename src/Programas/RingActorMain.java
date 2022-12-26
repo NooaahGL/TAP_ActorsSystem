@@ -42,6 +42,10 @@ public class RingActorMain {
 		long timeElapsed = endTime - startTime;
 		System.out.println("Execution time in nanoseconds: " + timeElapsed);
         System.out.println("Execution time in milliseconds: " + timeElapsed / 1000000);
+        
+        System.out.println(" ");
+        System.out.println("Lanzamos QuitMessage");
+        num2.send(new QuitMessage(null, "Hola"));	
 	}
 
 }

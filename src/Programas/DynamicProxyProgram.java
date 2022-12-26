@@ -1,12 +1,11 @@
 package Programas;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import ActorTypes.InsultActor;
 import Dades.*;
 import Dynamic.*;
-import Messages.Message;
+
 
 public class DynamicProxyProgram {
 	public static void main(String[] args) throws InterruptedException {	

@@ -2,7 +2,6 @@ package ActorTypes;
 
 import Dades.Actor;
 import Messages.Message;
-import Messages.QuitMessage;
 
 public class PingPongActor extends ActorGeneric{
 	private Actor nextActor;
@@ -21,22 +20,6 @@ public class PingPongActor extends ActorGeneric{
 		this.nextActor = nextActor;
 	}
 
-	@Override
-	public void run() {
-		Message m;
-		try {
-			m = cola.take();
-			while (m.getClass() != QuitMessage.class) {
-				System.out.println("PingPongActor recibio mensaje");
-				processMessage(m);
-				m = cola.take();
-			}
-			
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	@Override
 	public void processMessage(Message m) throws InterruptedException {
 		

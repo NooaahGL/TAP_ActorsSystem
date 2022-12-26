@@ -1,7 +1,5 @@
 package Messages;
 
-import java.lang.reflect.Method;
-
 import Dades.Actor;
 
 public class ObjectMessage extends Message{
@@ -31,11 +29,17 @@ public class ObjectMessage extends Message{
 		this.args = args;
 	}
 
-	public Class getArgsClass() {
+	public Class[] getArgsClass() {
 		if (args!= null) {
-			return args[0].getClass();
+			Class[] types = {int.class};
+			int i=0;
+			for(Object a:args) {
+				types[i] = a.getClass();
+				i++;
+			}
+			return types;
 		}else return null;
-		
+
 	}
 	
 	

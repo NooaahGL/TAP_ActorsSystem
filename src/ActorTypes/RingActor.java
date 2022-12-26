@@ -24,21 +24,6 @@ public class RingActor extends ActorGeneric {
 		this.principal = principal;
 	}
 
-	@Override
-	public void run() {
-		Message m;
-		try {
-			m = cola.take();
-			while (m.getClass() != QuitMessage.class) {
-				System.out.println("RingActor recibio mensaje");
-				processMessage(m);
-				m = cola.take();
-			}
-			
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
 
 	@Override
 	public void processMessage(Message m) throws InterruptedException {

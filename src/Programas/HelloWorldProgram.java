@@ -14,6 +14,7 @@ public class HelloWorldProgram {
 		
 		ActorProxy a = aContext.spawnActor("Actor1", new HelloWorldActor());
 		a.send(new Message(null, "Hola"));
+		System.out.println("Fin");
 		
 		
 	}

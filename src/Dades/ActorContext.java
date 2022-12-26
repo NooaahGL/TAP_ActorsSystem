@@ -62,12 +62,19 @@ public class ActorContext{
 		return actorTable.keySet();
 	}
 	
-	public boolean existeProxy(ActorProxyResponder a) {
+	public boolean existProxy(ActorProxyResponder a) {
 		return actorTable.containsValue(a.getActor());
 	}
 	
-	public boolean existe(Actor a) {
+	public boolean exist(Actor a) {
 		return actorTable.containsValue(a);
 	}
-	
+	public int numActors() {
+		return actorTable.size();
+	}
+	public Actor[] actorsList() {
+		return (Actor[]) actorTable.values().toArray();
+	}
+
+
 }

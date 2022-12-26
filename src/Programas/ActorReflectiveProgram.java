@@ -17,8 +17,7 @@ public class ActorReflectiveProgram {
 		InsultServiceInterface insulter = (InsultServiceInterface)DynamicProxy.intercept(new InsultService(), insult);
 		insulter.addInsult("stupid");
 		System.out.println(insulter.getInsult());
-		System.out.println(insulter.getInsult());
-		System.out.println(insulter.getInsult());
+
 		//crea clases nuevas cada vez que invoco a una función
 		
 	}

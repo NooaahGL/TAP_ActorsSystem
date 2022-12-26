@@ -22,17 +22,6 @@ public class InsultActor extends ActorGeneric {
         default -> System.out.println("ERROR");
 	       
 	    }
-		/*
-		if (m instanceof AddInsultMessage) {
-			addInsultMessage(m);
-			
-		}else if(m instanceof GetInsultMessage){
-			GetInsultMessage(m);
-			
-		}else if(m instanceof AllInsultMessages){
-			GetAllInsultsMessage(m);
-		}
-		  */
 	}
 	
 	public void GetInsultMessage(Message m) throws InterruptedException {
@@ -65,20 +54,6 @@ public class InsultActor extends ActorGeneric {
 	public int getNumInsults() {
 		return insults.size();
 	}
-	@Override
-	public void run() {
-		Message m;
-		try {
-			m = cola.take();
-			while (m.getClass() != QuitMessage.class) {
-				System.out.println("InsultActor recibio mensaje");
-				processMessage(m);
-				m = cola.take();
-			}
-			
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
+
 
 }

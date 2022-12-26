@@ -8,10 +8,12 @@ public class InsultService implements InsultServiceInterface{
 	private Actor a;
 	private List<String> insults ;
 	
+	
 
 	public InsultService(Actor a) {
 		this.a = a;
 		this.insults = new ArrayList<String>();
+		
 
 	}
 	public InsultService() {
@@ -19,12 +21,7 @@ public class InsultService implements InsultServiceInterface{
 	}
 
 	public void addInsult(String s) {
-		insults.add(s);
-	}
-	public void addInsult() {
-		System.out.println("Agregado insulto mediante InsultService");
-		System.out.println("");
-		insults.add("stupid");
+		insults.add(s);	
 	}
 
 	public String getInsult() {

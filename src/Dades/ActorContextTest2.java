@@ -3,8 +3,6 @@ package Dades;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 import ActorTypes.HelloWorldActor;
 
 class ActorContextTest2 {
@@ -14,7 +12,7 @@ class ActorContextTest2 {
 	void testExiste() {
 		
 		ActorProxy a = acContext.spawnActor("Actor1", new HelloWorldActor());
-		Boolean respuesta = acContext.existe(a);
+		Boolean respuesta = acContext.exist(a);
 		assertTrue(respuesta==true);
 	}
 	
@@ -22,7 +20,7 @@ class ActorContextTest2 {
 	void testExiste2() {
 		
 		ActorProxy b = new ActorProxy(new HelloWorldActor());
-		Boolean respuesta = acContext.existe(b);
+		Boolean respuesta = acContext.exist(b);
 		assertTrue(respuesta==false);
 	}
 	
@@ -30,7 +28,7 @@ class ActorContextTest2 {
 	void testSpawn() {
 		
 		ActorProxy a = acContext.spawnActor("Actor1", new HelloWorldActor());
-		Boolean respuesta = acContext.existe(a);
+		Boolean respuesta = acContext.exist(a);
 		assertTrue(respuesta==true);
 	}
 
