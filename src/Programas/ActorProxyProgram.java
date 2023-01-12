@@ -26,7 +26,7 @@ public class ActorProxyProgram {
 		Message resultB;
 		for (int i = 0; i<numMess;i++) {
 			resultB= b.receive();
-			System.out.println(resultB.getMensaje());
+			System.out.println(resultB.getMessage());
 		}
 
 		

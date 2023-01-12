@@ -7,14 +7,14 @@ public class ActorProxyResponder implements Actor {
 	
 	private ActorProxy actor;
 	
-	public ActorProxyResponder(ActorProxy actor) {
+	public ActorProxyResponder(Actor actor2) {
 		
-		this.actor = actor;
+		this.actor = (ActorProxy) actor2;
 	}
 
 	public void send(Message m) throws InterruptedException{
 		actor.sendProxy(m);
-		System.out.println("Mensaje enviado al proxy");
+		System.out.println("Message sent to proxy");
 	}
 	
 	public void processMessage(Message m) throws InterruptedException{

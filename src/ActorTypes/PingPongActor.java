@@ -4,12 +4,13 @@ import Dades.Actor;
 import Messages.Message;
 
 public class PingPongActor extends ActorGeneric{
-	private Actor nextActor;
-	private String nom;
 	
-	public PingPongActor(Actor nextActor, String nom) {
+	private Actor nextActor;
+	private String name;
+	
+	public PingPongActor(Actor nextActor, String name) {
 		this.nextActor = nextActor;
-		this.nom = nom;
+		this.name = name;
 	}
 
 	public Actor getNextActor() {
@@ -25,7 +26,7 @@ public class PingPongActor extends ActorGeneric{
 		
 		if(nextActor != null) {
 			m.setFrom(this);
-			System.out.println(nom+": Mensaje '"+m.getMensaje()+"' recibido");
+			System.out.println(name+": Message '"+m.getMessage()+"' received");
 			System.out.println("");
 			nextActor.send(m);
 			
@@ -36,12 +37,12 @@ public class PingPongActor extends ActorGeneric{
 		
 	}
 
-	public String getNom() {
-		return nom;
+	public String getName() {
+		return name;
 	}
 
-	public void setNom(String nom) {
-		this.nom = nom;
+	public void setName(String name) {
+		this.name = name;
 	}
 	
 

@@ -28,7 +28,7 @@ public class ActorDecoratorProgram {
 		
 		
 		//--------------------------------------------------------------------------------
-		System.out.println("------------Prueba decotator encrypt------------");
+		System.out.println("------------Prueba decorator encrypt------------");
 		//--------------------------------------------------------------------------------
 		ActorProxy encrypt = acContext.spawnActor("ActorEncrypt", new EncryptionDecorator(new HelloWorldActor()));
 		
@@ -75,7 +75,7 @@ public class ActorDecoratorProgram {
 		lambdaEncrypt.send(m);
 		
 		m = lambdaEncrypt.receive();
-		System.out.println(n.getMensaje());
+		System.out.println(n.getMessage());
 
 	}
 

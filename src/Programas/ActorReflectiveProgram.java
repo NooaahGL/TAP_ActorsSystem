@@ -4,6 +4,7 @@ import ActorTypes.*;
 import Dades.ActorContext;
 import Dades.ActorProxy;
 import Dynamic.*;
+import Messages.Message;
 
 
 public class ActorReflectiveProgram {
@@ -18,7 +19,6 @@ public class ActorReflectiveProgram {
 		insulter.addInsult("stupid");
 		System.out.println(insulter.getInsult());
 
-		//crea clases nuevas cada vez que invoco a una función
 		
 	}
 }

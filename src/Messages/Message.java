@@ -24,6 +24,7 @@ public class Message {
 	public Message(Actor from) {
 		this.from = from;
 	}
+	
 	public Actor getFrom() {
 		return from;
 	}
@@ -32,11 +33,11 @@ public class Message {
 		this.from = from;
 	}
 
-	public String getMensaje() {
+	public String getMessage() {
 		return mensaje;
 	}
 	
-	public void setMensaje(String mensaje) {
+	public void setMessage(String mensaje) {
 		this.mensaje = mensaje;
 	}
 	public boolean containsActor() {

@@ -10,8 +10,8 @@ import MonitorService.*;
 
 public class ActorGeneric implements Runnable, Actor  {
 
-	BlockingQueue<Message> cola = new LinkedBlockingDeque<Message>();
-	SubjectActor monitorService = SubjectActor.getInstance();
+	BlockingQueue<Message> queque = new LinkedBlockingDeque<Message>();
+	MonitorService monitorService = MonitorService.getInstance();
 	
 	public ActorGeneric() {
 		
@@ -21,12 +21,12 @@ public class ActorGeneric implements Runnable, Actor  {
 		Message m;
 		try {
 			monitorService.setState(States.creationMessage, this);
-			m = cola.take();
+			m = queque.take();
 			while (!(m instanceof QuitMessage)) {
-				System.out.println("Actor recibio mensaje");
+				System.out.println("Actor receives a message");
 				processMessage(m);
 				monitorService.setState(States.receivedMessage, this,m);
-				m = cola.take();
+				m = queque.take();
 			}
 			monitorService.setState(States.FinalizationMessage, this);
 		} catch (InterruptedException e) {
@@ -37,7 +37,7 @@ public class ActorGeneric implements Runnable, Actor  {
 	
 	public void send(Message m) throws InterruptedException {
 		monitorService.setState(States.sendMessage, this, m);
-		cola.add(m);
+		queque.add(m);
 	}
 
 	public void processMessage(Message m) throws InterruptedException {

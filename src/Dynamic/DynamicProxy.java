@@ -20,35 +20,15 @@ public class DynamicProxy implements InvocationHandler{
         this.target = target;
         this.actor=a;
     }
-
-    
-	public Object invoke2(Object proxy, Method method, Object[] args) throws Throwable {
-        Object invocationResult = null;
-        String name = method.getName();
-        
-        if("addInsult".equals(name)) {								
-           actor.getActor().send(new AddInsultMessage(actor, (String) args[0]));
-           
-        } else if("getInsult".equals(name)) {
-        	actor.getActor().send(new GetInsultMessage(new ActorProxyResponder(actor)));
-        	invocationResult = actor.receive().getMensaje();
-            
-        } else if("getAllInsults".equals(name)) {
-        	actor.getActor().send(new AllInsultMessages(new ActorProxyResponder(actor)));
-        	for (int i = 0; i<((InsultActor) actor.getActor()).getNumInsults();i++) {
-    			System.out.println(actor.receive().getMensaje());
-    		}
-        }
-            return invocationResult;
-	}
 	
 	@Override
 	public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Object invocationResult = null;
-        
-        actor.getActor().send(new ObjectMessage(actor, method.getName(), args));
+        ActorProxyResponder a = new ActorProxyResponder(actor);
+        actor.getActor().send(new ObjectMessage(a, method.getName(), args));
         if (method.getReturnType() != void.class) {
-        	invocationResult = actor.receive();
+        	invocationResult = actor.receive().getMessage();
+        	
         }
         return invocationResult;
 	}

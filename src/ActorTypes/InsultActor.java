@@ -11,12 +11,11 @@ public class InsultActor extends ActorGeneric {
 		insults = new LinkedList<String>();
 	}
 
-	
 	public void processMessage(Message m) throws InterruptedException {
 		
 		switch (m){
         case AddInsultMessage m1 -> addInsultMessage(m);
-        case QuitMessage m1 -> System.out.println("BWYE BYE ");
+        case QuitMessage m1 -> System.out.println("BYE BYE ");
         case GetInsultMessage m1 -> GetInsultMessage(m1);
         case AllInsultMessages m1 -> GetAllInsultsMessage(m1);
         default -> System.out.println("ERROR");
@@ -42,11 +41,10 @@ public class InsultActor extends ActorGeneric {
 		}
 		System.out.println("");
 	}
-	
 
 	private void addInsultMessage(Message m) {
-		System.out.println("Agregado el insulto " + m.getMensaje());
-		insults.add(m.getMensaje());
+		System.out.println("Add the insult " + m.getMessage());
+		insults.add(m.getMessage());
 		System.out.println("");
 
 	}

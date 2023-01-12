@@ -10,20 +10,18 @@ public class ActorContext{
 
 	private static ActorContext actorContext;
 	
-	// es un singleton con una única instancia que es una lista de actores
 	private HashMap<String, Actor> actorTable = new HashMap<String, Actor>();
 	
 	private ActorContext() {
-		// es un singleton no tiene constructor
+		
 	}
-	
 	
 	public static ActorContext getInstance() {
 		if (actorContext == null) {
 			actorContext = new ActorContext();
-			System.out.println("Instancia creada por primera vez");
+			System.out.println("First created instance");
 		}
-		System.out.println("Instancia retornada");
+		System.out.println("Returned instance");
 		return actorContext;
 
 	}
@@ -35,15 +33,14 @@ public class ActorContext{
 		proxy = new ActorProxy(a);
 		
 		//Pattern Factory para elegir entre threads y virtualThreads
-		ThreadAbstractFactory factory = new VThreadFactory();
+		ThreadAbstractFactory factory = new NThreadFactory();
 		AbstractThread th = factory.createThread(a);
 		
 		th.startThread();
-		//t. start();
 		
 		actorTable.put(name, a);
 
-		System.out.println("Actor " + name + " añadido al context");
+		System.out.println("Actor " + name + " added to context");
 		System.out.println("");
 		return proxy;
 		

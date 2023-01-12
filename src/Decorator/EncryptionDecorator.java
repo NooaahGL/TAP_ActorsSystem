@@ -27,8 +27,8 @@ public class EncryptionDecorator implements Actor{
 			IvParameterSpec valor = generateIv();
 			
 			message = new EncryptMessage(m.getFrom(), null ,key, valor);
-			message.setMensaje(encrypt(algorithm, m.getMensaje(), key, valor));
-			System.out.println("Mensaje encriptado: " + message.getMensaje());
+			message.setMessage(encrypt(algorithm, m.getMessage(), key, valor));
+			System.out.println("Mensaje encriptado: " + message.getMessage());
 			m.getFrom().send(message);
 			
 		} catch (InvalidKeyException | NoSuchPaddingException | InvalidAlgorithmParameterException | BadPaddingException | IllegalBlockSizeException | NoSuchAlgorithmException e)  {
@@ -43,9 +43,9 @@ public class EncryptionDecorator implements Actor{
 			SecretKey key = ((EncryptMessage) m).getKey();
 		
 			try {
-				String text = decrypt(algorithm, m.getMensaje(), key, ((EncryptMessage) m).getValor());
+				String text = decrypt(algorithm, m.getMessage(), key, ((EncryptMessage) m).getValor());
 				Message desencrypt = new Message(m.getFrom(), text);
-				System.out.println("Mensaje desencriptado: " + text);
+				System.out.println("Decrypted message: " + text);
 				actor.processMessage(desencrypt);
 				
 			} catch (InvalidKeyException | NoSuchPaddingException | InvalidAlgorithmParameterException | BadPaddingException | IllegalBlockSizeException | NoSuchAlgorithmException e)  {

@@ -3,49 +3,46 @@ package ActorTypes;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import Messages.Message;
-import Messages.ObjectMessage;
-import Messages.QuitMessage;
+import Messages.*;
 
 public class ReflectiveActor extends ActorGeneric {
 
-	public Object instancia;
+	public Object instance;
 	
 	public ReflectiveActor(Object clase) {
-		this.instancia=clase;
+		this.instance=clase;
 		
 	}
 
-
 	public void processMessage(Message m) {
-		ObjectMessage m2 = (ObjectMessage)m;
-		//Class aClass = instancia.getClass();
-		Method nameMethod;
+		ObjectMessage m2 = (ObjectMessage) m;
+		Method nameMethod = null;
+		
 		try {
-			Class aClass = instancia.getClass();
+			Class aClass = instance.getClass();
 			
 			String name = m2.getMethod();
 			System.out.println(name);
 			
 			Class[] parameterType = m2.getArgsClass();
-			System.out.println(parameterType);
-			
-			aClass.getMethods();
-			//nameMethod = aClass.getMethod(name, parameterType);
+
 			nameMethod = aClass.getDeclaredMethod(name, parameterType);
+			System.out.println("method = " + nameMethod.toString());
+			Object invocationResult = null;
 			
-			nameMethod.invoke(instancia);
+			if (parameterType != null) {
+				invocationResult = nameMethod.invoke(instance, m2.getArgs());
+			}else {
+				invocationResult = nameMethod.invoke(instance);
+			}
 			
-		} catch (NoSuchMethodException e) {
-			e.printStackTrace();
-		} catch (SecurityException e) {
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
+			if (invocationResult != null) {
+				m2.getFrom().send(new Message(this, invocationResult.toString()));
+			}
+			
+		}  catch (SecurityException | IllegalAccessException | InvocationTargetException | NoSuchMethodException | InterruptedException e) {
 			e.printStackTrace();
 		}
-        
 	}
 
 }

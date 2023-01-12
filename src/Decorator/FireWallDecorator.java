@@ -19,7 +19,7 @@ public class FireWallDecorator extends ActorGeneric {
 		if (contx.exist(m.getFrom())) {
 			actor.send(m);
 		}else {
-			System.out.println("El actor " + m.getFrom()+ " no existe en el context. Mensaje retenido por el firewall");
+			System.out.println("El actor " + m.getFrom().toString()+ " intenta enviar un mensaje, pero no existe en el context. Mensaje retenido por el firewall");
 		}
 	}
 

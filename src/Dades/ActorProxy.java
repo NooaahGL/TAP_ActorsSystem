@@ -43,7 +43,7 @@ public class ActorProxy implements Actor, Runnable{
 	
 	public void sendProxy(Message m) throws InterruptedException{
 		colaMessage.put(m);
-		System.out.println("Mensaje en la cola del proxy");
+		System.out.println("Message at proxy queue");
 		
 	}
 
